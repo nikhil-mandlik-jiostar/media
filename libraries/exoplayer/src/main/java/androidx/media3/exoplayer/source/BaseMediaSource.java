@@ -19,9 +19,11 @@ import static androidx.media3.common.util.Assertions.checkStateNotNull;
 
 import android.os.Handler;
 import android.os.Looper;
+import android.util.Log;
 import androidx.annotation.Nullable;
 import androidx.media3.common.Timeline;
 import androidx.media3.common.util.Assertions;
+import androidx.media3.common.util.TraceUtil;
 import androidx.media3.common.util.UnstableApi;
 import androidx.media3.datasource.TransferListener;
 import androidx.media3.exoplayer.analytics.PlayerId;
@@ -244,6 +246,8 @@ public abstract class BaseMediaSource implements MediaSource {
       MediaSourceCaller caller,
       @Nullable TransferListener mediaTransferListener,
       PlayerId playerId) {
+    Log.i("nikhil-debug", "mediaSource:prepareSource");
+    TraceUtil.beginSection("mediaSource:prepareSource");
     Looper looper = Looper.myLooper();
     Assertions.checkArgument(this.looper == null || this.looper == looper);
     this.playerId = playerId;
@@ -257,6 +261,7 @@ public abstract class BaseMediaSource implements MediaSource {
       enable(caller);
       caller.onSourceInfoRefreshed(/* source= */ this, timeline);
     }
+    TraceUtil.endSection();
   }
 
   @UnstableApi

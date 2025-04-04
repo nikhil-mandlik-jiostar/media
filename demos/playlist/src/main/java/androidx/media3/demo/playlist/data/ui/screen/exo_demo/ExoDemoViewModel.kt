@@ -34,7 +34,7 @@ class ExoDemoViewModel @Inject constructor(
         override fun onRenderedFirstFrame() {
             if (!firstFrameRendered) {
                 firstFrameRendered = true
-                android.os.Trace.endSection()
+                android.os.Trace.endAsyncSection("load:demo:$currentIndex", currentIndex)
             }
         }
     }
@@ -63,9 +63,10 @@ class ExoDemoViewModel @Inject constructor(
     }
 
     fun loadItem(i: Int) {
+        Log.i(TAG, "loadItem: is called for $i")
+        android.os.Trace.beginAsyncSection("load:demo:$i", i)
         currentIndex = i
         firstFrameRendered = false
-        android.os.Trace.beginSection("load:demo:$i")
         val videoItem = _videoItems[i]
         exoplayer.setMediaItem(MediaItem.fromUri(videoItem))
         exoplayer.prepare()

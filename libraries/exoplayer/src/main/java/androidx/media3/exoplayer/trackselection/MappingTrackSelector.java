@@ -23,6 +23,7 @@ import static java.lang.annotation.ElementType.METHOD;
 import static java.lang.annotation.ElementType.PARAMETER;
 import static java.lang.annotation.ElementType.TYPE_USE;
 
+import android.util.Log;
 import android.util.Pair;
 import androidx.annotation.IntDef;
 import androidx.annotation.Nullable;
@@ -33,6 +34,7 @@ import androidx.media3.common.Timeline;
 import androidx.media3.common.TrackGroup;
 import androidx.media3.common.Tracks;
 import androidx.media3.common.util.NullableType;
+import androidx.media3.common.util.TraceUtil;
 import androidx.media3.common.util.UnstableApi;
 import androidx.media3.common.util.Util;
 import androidx.media3.exoplayer.ExoPlaybackException;
@@ -355,6 +357,8 @@ public abstract class MappingTrackSelector extends TrackSelector {
       MediaPeriodId periodId,
       Timeline timeline)
       throws ExoPlaybackException {
+    TraceUtil.beginSection("trackSelector:selectTracks");
+    Log.i("nikhil-debug", "trackSelector:selectTracks");
     // Structures into which data will be written during the selection. The extra item at the end
     // of each array is to store data associated with track groups that cannot be associated with
     // any renderer.
@@ -434,7 +438,7 @@ public abstract class MappingTrackSelector extends TrackSelector {
             timeline);
 
     Tracks tracks = TrackSelectionUtil.buildTracks(mappedTrackInfo, result.second);
-
+    TraceUtil.endSection();
     return new TrackSelectorResult(result.first, result.second, tracks, mappedTrackInfo);
   }
 

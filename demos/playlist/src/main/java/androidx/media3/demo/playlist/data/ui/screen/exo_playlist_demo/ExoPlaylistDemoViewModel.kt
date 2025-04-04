@@ -43,7 +43,7 @@ class ExoPlaylistDemoViewModel @Inject constructor(
         override fun onRenderedFirstFrame() {
             if (!firstFrameRendered) {
                 firstFrameRendered = true
-                android.os.Trace.endSection()
+                android.os.Trace.endAsyncSection("load:demo:$currentIndex", currentIndex)
             }
         }
     }
@@ -94,9 +94,9 @@ class ExoPlaylistDemoViewModel @Inject constructor(
     }
 
     fun loadItem(index: Int, prepareRequired: Boolean = false) {
+        android.os.Trace.beginAsyncSection("load:demo:$index", index)
         currentIndex = index
         firstFrameRendered = false
-        android.os.Trace.beginSection("load:demo:$index")
         if (prepareRequired) {
             exoplayer.prepare()
         } else {

@@ -29,6 +29,7 @@ import androidx.media3.common.MediaItem;
 import androidx.media3.common.MimeTypes;
 import androidx.media3.common.util.Assertions;
 import androidx.media3.common.util.Log;
+import androidx.media3.common.util.TraceUtil;
 import androidx.media3.common.util.UnstableApi;
 import androidx.media3.common.util.Util;
 import androidx.media3.datasource.DataSource;
@@ -464,6 +465,8 @@ public final class DefaultMediaSourceFactory implements MediaSourceFactory {
   @UnstableApi
   @Override
   public MediaSource createMediaSource(MediaItem mediaItem) {
+    TraceUtil.beginSection("mediaSource:createMediaSource");
+    android.util.Log.i("nikhil-debug", "mediaSource:createMediaSource");
     Assertions.checkNotNull(mediaItem.localConfiguration);
     @Nullable String scheme = mediaItem.localConfiguration.uri.getScheme();
     if (scheme != null && scheme.equals(C.SSAI_SCHEME)) {
@@ -572,6 +575,7 @@ public final class DefaultMediaSourceFactory implements MediaSourceFactory {
 
       mediaSource = new MergingMediaSource(mediaSources);
     }
+    TraceUtil.endSection();
     return maybeWrapWithAdsMediaSource(mediaItem, maybeClipMediaSource(mediaItem, mediaSource));
   }
 
