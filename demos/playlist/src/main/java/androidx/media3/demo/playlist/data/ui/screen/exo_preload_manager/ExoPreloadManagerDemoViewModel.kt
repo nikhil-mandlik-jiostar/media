@@ -15,6 +15,7 @@ import androidx.media3.exoplayer.source.preload.DefaultPreloadManager.Status.STA
 import androidx.media3.exoplayer.source.preload.PreloadException
 import androidx.media3.exoplayer.source.preload.PreloadManagerListener
 import androidx.media3.exoplayer.source.preload.TargetPreloadStatusControl
+import androidx.media3.exoplayer.util.EventLogger
 import androidx.media3.ui.PlayerView
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dagger.hilt.android.qualifiers.ApplicationContext
@@ -81,7 +82,8 @@ class ExoPreloadManagerDemoViewModel @Inject constructor(
         val preloadManagerBuilder = DefaultPreloadManager.Builder(
             context,
             targetPreloadStatusControl
-        ).setLoadControl(loadController)
+        ).setRenderersFactory(renderFactory)
+            .setLoadControl(loadController)
 
         exoplayer = preloadManagerBuilder.buildExoPlayer(
             ExoPlayer.Builder(context)
@@ -90,6 +92,7 @@ class ExoPreloadManagerDemoViewModel @Inject constructor(
         ).apply {
             playWhenReady = true
             addListener(listener)
+            addAnalyticsListener(EventLogger())
         }
 
         preloadManager = preloadManagerBuilder.build()

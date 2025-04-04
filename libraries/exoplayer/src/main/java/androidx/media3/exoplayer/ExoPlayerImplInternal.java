@@ -311,12 +311,15 @@ import java.util.concurrent.atomic.AtomicBoolean;
         rendererCapabilities[i].setListener(rendererCapabilitiesListener);
       }
       if (secondaryRenderers[i] != null) {
+        android.util.Log.i("nikhil-debug", "ExoPlayerImplInternal: initializing secondary renderer");
         secondaryRenderers[i].init(/* index= */ i + renderers.length, playerId, clock);
         hasSecondaryRenderers = true;
       }
       this.renderers[i] = new RendererHolder(renderers[i], secondaryRenderers[i], /* index= */ i);
     }
     this.hasSecondaryRenderers = hasSecondaryRenderers;
+
+    android.util.Log.i("nikhil-debug", "ExoPlayerImplInternal: hasSecondaryRenderers = "+this.hasSecondaryRenderers);
 
     mediaClock = new DefaultMediaClock(this, clock);
     pendingMessages = new ArrayList<>();
@@ -2517,15 +2520,24 @@ import java.util.concurrent.atomic.AtomicBoolean;
 
   private void maybePrewarmRenderers() throws ExoPlaybackException {
     @Nullable MediaPeriodHolder prewarmingPeriod = queue.getPrewarmingPeriod();
+    android.util.Log.i("nikhil-debug", "maybePrewarmRenderers: preWarmingPeriod = "+prewarmingPeriod);
     if (prewarmingPeriod == null) {
       return;
     }
     TrackSelectorResult trackSelectorResult = prewarmingPeriod.getTrackSelectorResult();
     for (int i = 0; i < renderers.length; i++) {
+
+//      android.util.Log.i("nikhil-debug", "maybePrewarmRenderers: preWarmingPeriod = " + prewarmingPeriod
+//          + ", rendererEnabled = " + trackSelectorResult.isRendererEnabled(i)
+//          + ", hasSecondary = " + renderers[i].hasSecondary()
+//          + ", isNotPrewarming = " + (!renderers[i].isPrewarming()));
+
       if (trackSelectorResult.isRendererEnabled(i)
           && renderers[i].hasSecondary()
           && !renderers[i].isPrewarming()) {
         renderers[i].startPrewarming();
+
+        android.util.Log.i("nikhil-debug", "maybePrewarmRenderers: starting prewarming");
         enableRenderer(
             prewarmingPeriod,
             /* rendererIndex= */ i,

@@ -26,6 +26,7 @@ import static androidx.media3.exoplayer.Renderer.STATE_STARTED;
 import static java.lang.Math.min;
 import static java.lang.annotation.ElementType.TYPE_USE;
 
+import android.util.Log;
 import androidx.annotation.IntDef;
 import androidx.annotation.Nullable;
 import androidx.media3.common.C;
@@ -60,6 +61,7 @@ import java.util.Objects;
     this.index = index;
     this.secondaryRenderer = secondaryRenderer;
     prewarmingState = RENDERER_PREWARMING_STATE_NOT_PREWARMING_USING_PRIMARY;
+    Log.i("nikhil-debug", "RendererHolder: prewarmingState set to RENDERER_PREWARMING_STATE_NOT_PREWARMING_USING_PRIMARY");
     primaryRequiresReset = false;
     secondaryRequiresReset = false;
   }
@@ -548,6 +550,8 @@ import java.util.Objects;
       }
     }
     prewarmingState = RENDERER_PREWARMING_STATE_NOT_PREWARMING_USING_PRIMARY;
+    Log.i("nikhil-debug", "RendererHolder: prewarmingState set to RENDERER_PREWARMING_STATE_NOT_PREWARMING_USING_PRIMARY");
+
   }
 
   /** Handles transition of pre-warming state and resources. */
@@ -564,6 +568,8 @@ import java.util.Objects;
     } else if (prewarmingState == RENDERER_PREWARMING_STATE_PREWARMING_PRIMARY) {
       prewarmingState = RENDERER_PREWARMING_STATE_NOT_PREWARMING_USING_PRIMARY;
     }
+    Log.i("nikhil-debug", "RendererHolder: prewarmingState set to "+prewarmingState);
+
   }
 
   private void transferResources(boolean transferToPrimary) throws ExoPlaybackException {
@@ -590,6 +596,9 @@ import java.util.Objects;
         isSecondaryActiveRenderer
             ? RENDERER_PREWARMING_STATE_NOT_PREWARMING_USING_SECONDARY
             : RENDERER_PREWARMING_STATE_NOT_PREWARMING_USING_PRIMARY;
+
+    Log.i("nikhil-debug", "RendererHolder: prewarmingState set to "+prewarmingState);
+
   }
 
   public void maybeDisableOrResetPosition(
