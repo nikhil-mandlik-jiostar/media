@@ -58,7 +58,9 @@ class ExoPlaylistDemoViewModel @Inject constructor(
                 8_000, //max buffer
                 2_000, //buffer for playback start
                 4_000 //buffer for playback after re-buffer
-            ).build()
+            )
+            .setPrioritizeTimeOverSizeThresholds(true)
+            .build()
 
         //Render Factory
         val renderFactory = DefaultRenderersFactory(context)
@@ -71,7 +73,6 @@ class ExoPlaylistDemoViewModel @Inject constructor(
             .build()
             .apply {
                 playWhenReady = true
-                repeatMode = REPEAT_MODE_ONE
                 addAnalyticsListener(EventLogger())
                 addListener(listener)
             }

@@ -40,5 +40,15 @@ fun HomeScreen(
         ) {
             Text("Exoplayer Playlist Demo")
         }
+
+        Spacer(modifier = Modifier.height(16.dp))
+
+        Button(
+            onClick = {
+                navigate(Screen.ExoPreloadManagerDemo.route)
+            }
+        ) {
+            Text("Exoplayer Preload Manager Demo")
+        }
     }
 }

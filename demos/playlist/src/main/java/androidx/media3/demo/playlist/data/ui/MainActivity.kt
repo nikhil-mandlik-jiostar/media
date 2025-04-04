@@ -28,6 +28,7 @@ import androidx.media3.demo.playlist.data.domain.Screen
 import androidx.media3.demo.playlist.data.ui.screen.HomeScreen
 import androidx.media3.demo.playlist.data.ui.screen.exo_demo.ExoDemoScreen
 import androidx.media3.demo.playlist.data.ui.screen.exo_playlist_demo.ExoPlayListDemoScreen
+import androidx.media3.demo.playlist.data.ui.screen.exo_preload_manager.ExoPreloadManagerDemoScreen
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
@@ -81,6 +82,16 @@ fun ComposeDemoApp(modifier: Modifier = Modifier) {
                 route = Screen.ExoPlayListDemo.route
             ) {
                 ExoPlayListDemoScreen (
+                    goBack = {
+                        navController.popBackStack()
+                    }
+                )
+            }
+
+            composable(
+                route = Screen.ExoPreloadManagerDemo.route
+            ) {
+                ExoPreloadManagerDemoScreen (
                     goBack = {
                         navController.popBackStack()
                     }
