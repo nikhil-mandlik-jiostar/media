@@ -78,6 +78,7 @@ import java.util.Objects;
             : secondaryRenderer != null && isRendererEnabled(secondaryRenderer)
                 ? RENDERER_PREWARMING_STATE_TRANSITIONING_TO_PRIMARY
                 : RENDERER_PREWARMING_STATE_PREWARMING_PRIMARY;
+    Log.i("nikhil-debug", "startPrewarming: prewarmingState = "+prewarmingState);
   }
 
   public boolean isPrewarming() {
