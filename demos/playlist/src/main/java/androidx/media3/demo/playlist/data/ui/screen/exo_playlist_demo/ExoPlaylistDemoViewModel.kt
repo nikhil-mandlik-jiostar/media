@@ -67,7 +67,7 @@ class ExoPlaylistDemoViewModel @Inject constructor(
         exoplayer = ExoPlayer.Builder(context)
             .setRenderersFactory(renderFactory)
             .setLoadControl(loadController)
-            .setUseLazyPreparation(true) //use this property to enable lazy preparation of next media item
+            .setUseLazyPreparation(false) //use this property to enable lazy preparation of next media item
             .build()
             .apply {
                 playWhenReady = true
