@@ -11,6 +11,7 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
+
 buildscript {
     repositories {
         google()
@@ -23,6 +24,11 @@ buildscript {
         classpath 'org.jetbrains.kotlin:compose-compiler-gradle-plugin:2.0.20'
     }
 }
+
+plugins {
+    id 'com.google.dagger.hilt.android' version '2.51.1' apply false
+}
+
 allprojects {
     repositories {
         google()
