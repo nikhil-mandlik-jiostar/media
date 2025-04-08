@@ -62,10 +62,10 @@ fun ActionButton(modifier: Modifier = Modifier, viewModel: ExoPreloadManagerDemo
             Text("NEXT")
         }
 
-        Button(
-            onClick = { viewModel.addMediaSource() }
-        ) {
-            Text("Add Media Source")
-        }
+//        Button(
+//            onClick = { viewModel.addMediaSource() }
+//        ) {
+//            Text("Add Media Source")
+//        }
     }
 }

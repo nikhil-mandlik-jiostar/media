@@ -113,7 +113,7 @@ class ExoPreloadManagerDemoViewModel @Inject constructor(
 
     fun onPlayerViewInitialized(playerView: PlayerView) {
         playerView.player = exoplayer
-        videoItems.forEachIndexed { index , url ->
+        (videoItems + additionalData).forEachIndexed { index , url ->
             val mediaItem = MediaItem.fromUri(url)
             preloadManager.add(mediaItem, index)
             val mediaSource = preloadManager.getMediaSource(mediaItem)

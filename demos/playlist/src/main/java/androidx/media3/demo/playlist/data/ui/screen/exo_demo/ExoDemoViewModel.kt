@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.media3.common.MediaItem
 import androidx.media3.common.Player
 import androidx.media3.common.Player.REPEAT_MODE_ONE
+import androidx.media3.demo.playlist.data.data.additionalData
 import androidx.media3.demo.playlist.data.data.videos
 import androidx.media3.exoplayer.ExoPlayer
 import androidx.media3.exoplayer.util.EventLogger
@@ -23,7 +24,7 @@ class ExoDemoViewModel @Inject constructor(
         private const val TAG = "ExoDemoViewModel"
     }
 
-    private val _videoItems = videos.toMutableList()
+    private val _videoItems = videos.toMutableList() + additionalData
 
     private val exoplayer: ExoPlayer
     private var currentIndex: Int = 0
